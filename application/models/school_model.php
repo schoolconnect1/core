@@ -26,4 +26,25 @@ Class School_model extends CI_Model{
         return $query->result();
     }
     
+    public function search($city,$search_term){
+        $query = null; 
+        if($city &&!$search_term){
+            //city
+            $this->db->like('city',$city,'both');
+            $query = $this->db->get_where($this->table_name);
+            
+        }else if(!$city && $search_term){
+            //search term
+            $this->db->like('school_name',$search_term,'both');
+            $query = $this->db->get_where($this->table_name);
+            
+        }else if($city && $search_term){
+            //both
+             $this->db->like('city',$city,'both');
+             $this->db->or_like('school_name',$search_term,'both');
+             $query = $this->db->get_where($this->table_name);
+        }
+        return $query->result();
+    }
+    
 }

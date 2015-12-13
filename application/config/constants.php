@@ -40,8 +40,8 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 
 
-//define('URL','http://localhost/SchoolConnect/');
-define('URL','http://schoolconnect.22web.org/');
+define('URL','http://localhost/SchoolConnect/');
+//define('URL','http://schoolconnect.22web.org/');
 define('URL_X',URL.'index.php/');
 
 

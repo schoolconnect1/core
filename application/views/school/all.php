@@ -37,3 +37,4 @@
         <?php } ?>
     </tbody>
 </table>
+<a href="<?php echo $back_url;?>" class="btn btn-primary">Back</a>

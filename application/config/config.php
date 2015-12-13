@@ -14,9 +14,9 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://schoolconnect.22web.org/';
-//$config['base_url'] = "http://localhost/SchoolConnect/";
-//$config['base_url']	= 'http://192.168.0.104/ECApp/';
+//$config['base_url']	= 'http://schoolconnect.22web.org/';
+$config['base_url'] = "http://localhost/SchoolConnect/";
+
 /*
 |--------------------------------------------------------------------------
 | Index File

@@ -35,11 +35,12 @@ class SchoolConnect extends MY_Controller {
                 'contact_number' => $this->input->post('state')
             );
             $response_code = $this->school_model->insertSchool($school);
-            $this->set_success_flash("School registered successfully.");
-            redirect('SchoolConnect');
+            
+            $this->set_success_flash("School registered successfully. id=$response_code");
+            redirect('SchoolConnect/register_school');
         }
         $data = array(
-            'form_submit_url' => site_url('SchoolConnect'),
+            'form_submit_url' => site_url('SchoolConnect/register_school'),
             'back_url' => site_url('SchoolConnect'),
         );
 
@@ -53,6 +54,22 @@ class SchoolConnect extends MY_Controller {
             'back_url' => site_url('SchoolConnect')
         );
         $this->load_view('school/all', $data);
+    }
+    
+    public function search(){
+        $data = array(
+            'back_url'=>  site_url('SchoolConnect'),
+            'form_submit_url'=> site_url('SchoolConnect/search')
+        );
+        if($this->input->post('search_term') || $this->input->post('city')){
+            $city = $this->input->post('city');
+            $search_term = $this->input->post('search_term');
+            $data['search_results'] = $this->school_model->search($city,$search_term);
+            
+        }else{
+            
+        }
+        $this->load_view("school/search", $data);
     }
 
 }
