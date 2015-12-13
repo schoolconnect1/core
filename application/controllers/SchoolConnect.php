@@ -1,0 +1,58 @@
+<?php
+
+class SchoolConnect extends MY_Controller {
+
+    public function __construct() {
+        parent::__construct();
+        $this->load->model('school_model');
+    }
+
+    public function load_view($view, $data) {
+        $this->load->view('template/header_1');
+        $this->load->view($view, $data);
+        $this->load->view('template/footer');
+    }
+
+    public function index() {
+        $data = array(
+            'list_all_url' => site_url('SchoolConnect/schools'),
+            'search_url' => site_url('SchoolConnect/search'),
+            'register_url' => site_url('SchoolConnect/register_school'),
+        );
+
+
+        $this->load_view('school/temp_home', $data);
+    }
+
+    public function register_school() {
+        if ($this->input->post('reg_number')) {
+            $school = array(
+                'reg_number' => $this->input->post('reg_number'),
+                'school_name' => $this->input->post('school_name'),
+                'city' => $this->input->post('city'),
+                'district' => $this->input->post('district'),
+                'state' => $this->input->post('state'),
+                'contact_number' => $this->input->post('state')
+            );
+            $response_code = $this->school_model->insertSchool($school);
+            $this->set_success_flash("School registered successfully.");
+            redirect('SchoolConnect');
+        }
+        $data = array(
+            'form_submit_url' => site_url('SchoolConnect'),
+            'back_url' => site_url('SchoolConnect'),
+        );
+
+
+        $this->load_view('school/register', $data);
+    }
+
+    public function schools() {
+        $data = array(
+            'schools' => $this->school_model->listSchools(),
+            'back_url' => site_url('SchoolConnect')
+        );
+        $this->load_view('school/all', $data);
+    }
+
+}
